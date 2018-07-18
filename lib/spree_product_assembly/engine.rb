@@ -9,11 +9,6 @@ module SpreeProductAssembly
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
-      if ::Rails::Engine.subclasses.map(&:name).include? "Spree::Wombat::Engine"
-        Dir.glob(File.join(File.dirname(__FILE__), "../../lib/**/*_serializer.rb")) do |serializer|
-          Rails.env.production? ? require(serializer) : load(serializer)
-        end
-      end
     end
 
     config.to_prepare &method(:activate).to_proc
